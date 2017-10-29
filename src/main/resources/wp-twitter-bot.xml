@@ -12,13 +12,14 @@
     <context:annotation-config/>
 
     <context:property-placeholder location="classpath:application.properties"/>
+    <context:property-placeholder location="classpath:hibernate.properties"/>
 
     <!-- Hibernate Config -->
     <bean id="wordpressDB" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${jdbcDriverClassName}"/>
-        <property name="url" value="${wordpressDB.url}"/>
-        <property name="username" value="${wordpressDB.username}"/>
-        <property name="password" value="${wordpressDB.password}"/>
+        <property name="url" value="${hibernate.connection.url}/${hibernate.default_schema}"/>
+        <property name="username" value="${hibernate.connection.username}"/>
+        <property name="password" value="${hibernate.connection.password}"/>
     </bean>
 
     <bean class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
