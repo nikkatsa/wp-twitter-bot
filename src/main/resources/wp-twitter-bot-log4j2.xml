@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration name="BasicConfiguration" status="info" monitorInterval="60">
+    <Appenders>
+        <File name="FileAppender" fileName="/var/log/wp-twitter-bot">
+            <PatternLayout header="**** Log4j2 File initialized ${date:dd-MM-YYYY:HH:mm:ss.SSS} ****%n%n"
+                           pattern="%d{ISO8601} %-5level %logger{36} [%-10.-10t] - %msg%n">
+            </PatternLayout>
+        </File>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="com.springframework" level="INFO"/>
+        <Logger name="org.hibernate" level="INFO"/>
+        <Root level="INFO">
+            <AppenderRef ref="FileAppender"/>
+        </Root>
+    </Loggers>
+</Configuration>

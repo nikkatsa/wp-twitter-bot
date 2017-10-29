@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd"
+       default-autowire="byType">
+
+    <context:annotation-config/>
+
+    <context:property-placeholder location="classpath:application.properties"/>
+
+    <!-- Hibernate Config -->
+    <bean id="wordpressDB" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbcDriverClassName}"/>
+        <property name="url" value="${wordpressDB.url}"/>
+        <property name="username" value="${wordpressDB.username}"/>
+        <property name="password" value="${wordpressDB.password}"/>
+    </bean>
+
+    <bean class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="wordpressDB"/>
+        <property name="configLocations">
+            <list>
+                <value>classpath:hibernate.cfg.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- bean post-processor for JPA annotations -->
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+    <!-- Exception translation bean post processor -->
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+
+    <bean id="hibernateDAO" class="com.nikoskatsanos.wp.twitter.bot.dao.service.WpPostsServiceImpl"/>
+
+    <!-- Twitter Service -->
+    <bean class="org.springframework.social.twitter.api.impl.TwitterTemplate">
+        <constructor-arg index="0" value="${spring.social.twitter.appId}"/>
+        <constructor-arg index="1" value="${spring.social.twitter.appSecret}"/>
+        <constructor-arg index="2" value="${twitter.access.token}"/>
+        <constructor-arg index="3" value="${twitter.access.token.secret}"/>
+    </bean>
+
+    <bean class="com.nikoskatsanos.wp.twitter.bot.TwitterService"/>
+    <bean class="com.nikoskatsanos.wp.twitter.bot.WordpressTweetsProvider"/>
+    <bean class="com.nikoskatsanos.wp.twitter.bot.TweetScheduler"/>
+
+</beans>
