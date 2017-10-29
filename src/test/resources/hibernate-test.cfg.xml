@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.dialect">${hibernate.dialect}</property>
+        <property name="hibernate.connection.driver_class">${hibernate.connection.driverClass}</property>
+        <property name="hibernate.connection.url">${hibernate.connection.url}</property>
+        <property name="hibernate.connection.username">${hibernate.connection.username}</property>
+        <property name="hibernate.connection.password">${hibernate.connection.password}</property>
+
+        <!-- Entity mappings -->
+        <mapping class="com.nikoskatsanos.wp.twitter.bot.dao.entities.WpPosts"/>
+        <mapping class="com.nikoskatsanos.wp.twitter.bot.dao.entities.WpTermRelationships"/>
+        <mapping class="com.nikoskatsanos.wp.twitter.bot.dao.entities.WpTerms"/>
+        <mapping class="com.nikoskatsanos.wp.twitter.bot.dao.entities.WpTermsTaxonomy"/>
+
+    </session-factory>
+</hibernate-configuration>
