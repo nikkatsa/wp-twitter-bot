@@ -54,6 +54,8 @@
                         <configuration>
                             <repositoryLayout>flat</repositoryLayout>
                             <useWildcardClassPath>true</useWildcardClassPath>
+                            <copyConfigurationDirectory>true</copyConfigurationDirectory>
+                            <configurationSourceDirectory>src/main/resources/etc</configurationSourceDirectory>
                             <platforms>
                                 <platform>unix</platform>
                             </platforms>
@@ -68,9 +70,9 @@
                                     <jvmSettings>
                                         <extraArgument>-Xmx32M</extraArgument>
                                         <extraArgument>-XX:+UseG1GC</extraArgument>
-                                        <!--<extraArgument>-XX:+PrintGC</extraArgument>-->
-                                        <!--<extraArgument>-XX:+PrintGCDetails</extraArgument>-->
-                                        <!--<extraArgument>-XX:+PrintGCTimeStamps</extraArgument>-->
+                                        <extraArgument>-XX:+PrintGC</extraArgument>
+                                        <extraArgument>-XX:+PrintGCDetails</extraArgument>
+                                        <extraArgument>-XX:+PrintGCTimeStamps</extraArgument>
                                         <extraArgument>-Dlog4j.configurationFile=wp-twitter-bot-log4j2.xml</extraArgument>
                                     </jvmSettings>
                                 </program>

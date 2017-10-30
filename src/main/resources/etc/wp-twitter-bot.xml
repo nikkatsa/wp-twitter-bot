@@ -11,8 +11,7 @@
 
     <context:annotation-config/>
 
-    <context:property-placeholder location="classpath:application.properties"/>
-    <context:property-placeholder location="classpath:hibernate.properties"/>
+    <context:property-placeholder location="classpath:application.properties,classpath:hibernate.properties"/>
 
     <!-- Hibernate Config -->
     <bean id="wordpressDB" class="org.springframework.jdbc.datasource.DriverManagerDataSource">

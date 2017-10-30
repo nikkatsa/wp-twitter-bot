@@ -8,6 +8,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class Application {
 
     public static void main(final String... args) {
-        new ClassPathXmlApplicationContext("wp-twitter-bot.xml");
+        new ClassPathXmlApplicationContext("etc/wp-twitter-bot.xml");
     }
 }

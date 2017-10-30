@@ -1,5 +1,7 @@
 package com.nikoskatsanos.wp.twitter.bot;
 
+import com.codahale.metrics.Counter;
+import com.nikoskatsanos.nkjutils.synthetic.metrics.MetricsFactory;
 import com.nikoskatsanos.nkjutils.yalf.YalfLogger;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.social.twitter.api.Twitter;
@@ -21,7 +23,13 @@ public class TwitterService implements Closeable {
 
     private Twitter twitter;
 
+    private Counter tweetsCounter;
+
     private boolean canTweet = false;
+
+    public TwitterService() {
+        this.tweetsCounter = MetricsFactory.createCounter("tweets");
+    }
 
     @PostConstruct
     public void start() {
@@ -36,6 +44,7 @@ public class TwitterService implements Closeable {
 
     public void tweet(final TweetDTO tweet) {
         log.info("About to tweet: %s", tweet);
+        this.tweetsCounter.inc();
         if (this.canTweet) {
             this.twitter.timelineOperations().updateStatus(tweet.toTweet());
         }
